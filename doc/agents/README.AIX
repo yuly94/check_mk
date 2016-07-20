@@ -3,7 +3,9 @@
 # Install the Agent
 To install the agent, simply copy it to a location where it can be executed.
 With inetd, this should be something in the basic system search path like /usr/bin.
-cp /tmp/check_mk_agent.aix /usr/bin/check_mk_agent
+cp check_mk_agent.aix check_mk_agent
+cp /tmp/check_mk_agent /usr/bin
+chmod +x check_mk_agent
 
 # Agent Config
 Inside the Agent you'll find two config settings, which need to be changed from the 
