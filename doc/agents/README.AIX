@@ -3,9 +3,31 @@
 # Install the Agent
 To install the agent, simply copy it to a location where it can be executed.
 With inetd, this should be something in the basic system search path like /usr/bin.
+
+copy the check_mk_agent.aix to /tmp folder
+
+use cd /tmp => to move to tmp folder
+use pwd => to know where you are
+
+you can use command like this to copy file from other server :
+
+scp /usr/bin/check_mk_agent root@(ip destination to copy) /usr/bin/check_mk_agent
+
+for example : you want to copy file from A to B, you must login to computer A and the destination is Computer B
+
+use ls -l | check_mk_agent => to see the list file, if your operation was success, there will be the file
+
+//Rename file
 cp check_mk_agent.aix check_mk_agent
+
+use ls -l | check_mk_agent => to see the list file, if your operation was success, there will be the file
+
 cp /tmp/check_mk_agent /usr/bin
+
+add the excecution permission to the file 
 chmod +x check_mk_agent
+
+the agents file is located on the monitoring server checkmk folder /agents
 
 # Agent Config
 Inside the Agent you'll find two config settings, which need to be changed from the 
@@ -25,8 +47,29 @@ mkdir /etc/check_mk /usr/lib/check_mk_agent /usr/lib/check_mk_agent/local /usr/l
 # INETD SETUP
 In most setups, the agent is called via inetd. To setup inetd for check_mk on AIX,
 start by adding the TCP service name to /etc/services:
+
+move to folder etc:
+cd /etc
+
+use pwd => to know where you are
+use ls -l | grep services => to see the list file
+
+backup the file :
+use cp services services_backup_tanggal.conf => to backup the services file
+
+use ls -l | grep services => to see the list file
+
+edit the file services by command
+
+vi services
+to start editing press i
+
 edit it and add the following entry:
 check_mk        6556/tcp    # Check_MK monitoring agent
+
+to save editing press esc then : (double vertical dot) then wq
+to close without saving press esc then : (double vertical dot) then q!
+
 
 
 # Access security
@@ -38,13 +81,46 @@ it's not recommended to use.
 The third way is the AIX internal firewall, which is called 'genfilt'.
 
 Inetd is configured with the file /etc/inetd.conf. Add the service to it with correct path.
+
+ 
+use pwd to know where you are
+use ls -l | grep services => to see the list file
+
+backup the file :
+use cp inetd.conf inetd_backup_tanggal.conf => to backup the services file
+
+use ls -l | grep inetd => to see the list file
+
+edit the file services by command
+
+vi services
+to start editing press i
+
+edit it and add the following entry:
 #        WITHOUT TCPWRAPPERS
 check_mk        stream  tcp     nowait  root    /usr/bin/check_mk_agent
 
+to save editing press esc then : (double vertical dot) then wq
+to close without saving press esc then : (double vertical dot) then q!
 
 Then enable the service using:
 # Restart inetd
 refresh -s inetd
+
+you can test the installation success or not by exsecute the command bellow on terminal :
+check_mk_agent
+
+there will be alot of text in your screen, it indicate your config are running well
+
+or
+
+you can test the installation success or not by exsecute the command bellow on monitoring server terminal :
+telnet ipaddress 6556
+
+there will be alot of text in your screen, it indicate your config are running well
+
+#THE END
+
 
 Alternatively, 
 #        WITH TCPWRAPPERS
