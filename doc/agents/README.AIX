@@ -6,8 +6,8 @@ With inetd, this should be something in the basic system search path like /usr/b
 
 copy the check_mk_agent.aix to /tmp folder
 
-use cd /tmp => to move to tmp folder
-use pwd => to know where you are
+cd /tmp => to move to tmp folder
+pwd => to know where you are
 
 you can use command like this to copy file from other server :
 
@@ -15,12 +15,12 @@ scp /usr/bin/check_mk_agent root@(ip destination to copy) /usr/bin/check_mk_agen
 
 for example : you want to copy file from A to B, you must login to computer A and the destination is Computer B
 
-use ls -l | check_mk_agent => to see the list file, if your operation was success, there will be the file
+ls -l | grep check_mk_agent => to see the list file, if your operation was success, there will be the file
 
 //Rename file
 cp check_mk_agent.aix check_mk_agent
 
-use ls -l | check_mk_agent => to see the list file, if your operation was success, there will be the file
+ls -l | grep check_mk_agent => to see the list file, if your operation was success, there will be the file
 
 cp /tmp/check_mk_agent /usr/bin
 
@@ -51,11 +51,11 @@ start by adding the TCP service name to /etc/services:
 move to folder etc:
 cd /etc
 
-use pwd => to know where you are
-use ls -l | grep services => to see the list file
+pwd => to know where you are
+ls -l | grep services => to see the list file
 
 backup the file :
-use cp services services_backup_tanggal.conf => to backup the services file
+cp services services_backup_tanggal.conf => to backup the services file
 
 use ls -l | grep services => to see the list file
 
@@ -83,13 +83,13 @@ The third way is the AIX internal firewall, which is called 'genfilt'.
 Inetd is configured with the file /etc/inetd.conf. Add the service to it with correct path.
 
  
-use pwd to know where you are
-use ls -l | grep services => to see the list file
+pwd to know where you are
+ls -l | grep services => to see the list file
 
 backup the file :
-use cp inetd.conf inetd_backup_tanggal.conf => to backup the services file
+cp inetd.conf inetd_backup_tanggal.conf => to backup the services file
 
-use ls -l | grep inetd => to see the list file
+ls -l | grep inetd => to see the list file
 
 edit the file services by command
 
